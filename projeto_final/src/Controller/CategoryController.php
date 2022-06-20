@@ -42,7 +42,7 @@ class CategoryController extends AbstractController
       $query = 'INSERT INTO categories (name, description) VALUES (:name, :description)';
       $result = $connection->prepare($query);
 
-      foreach ($params as $key => $val) {
+      foreach ($params as $key => &$val) {
         $result->bindParam($key, $val);
       }
 
@@ -62,7 +62,41 @@ class CategoryController extends AbstractController
 
   public function editAction(): void
   {
-    $this->render('category/edit');
+    if (isset($_GET['id'])) {
+      $id = (int) $_GET['id'];
+      $connection = Connection::getInstance();
+
+      $query = 'SELECT * FROM categories WHERE id = :id';
+      $result = $connection->prepare($query);
+      $result->bindParam('id', $id);
+      $result->execute();
+
+      $category = $result->fetch();
+    }
+
+    if ($_POST) {
+      $connection = Connection::getInstance();
+
+      $params = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $query = 'UPDATE categories SET name = :name, description = :description WHERE id = :id';
+      $result = $connection->prepare($query);
+
+      $result->bindParam('id', $id);
+
+      foreach ($params as $key => &$val) {
+        $result->bindParam($key, $val);
+      }
+
+      $result->execute();
+
+      $message = urlencode('Categoria editada com sucesso!');
+      $type = urlencode('success');
+
+      redirect("/categorias?message={$message}&type={$type}");
+    }
+
+    $this->render('category/edit', $category);
   }
 
   public function deleteAction(): void
