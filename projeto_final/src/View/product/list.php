@@ -24,8 +24,8 @@
   <tbody>
     <?php
     foreach ($data as $product) {
-      $editUrl = BASE_URL . "/produtos/edit?id={$product->id}";
-      $deleteUrl = BASE_URL . "/produtos/delete?id={$product->id}";
+      $editUrl = "/produtos/edit?id={$product->id}";
+      $deleteUrl = "/produtos/delete?id={$product->id}";
 
       $price = number_format($product->value, 2, ',', '.');
 
@@ -39,7 +39,7 @@
 
       </td>";
       echo "<td>{$price}</td>";
-      echo "<td>{$product->category->name}</td>";
+      echo "<td>{$product->category_name}</td>";
       echo "<td>{$product->quantity}</td>";
       echo
       "<td>

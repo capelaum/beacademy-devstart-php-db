@@ -19,22 +19,25 @@ class ProductController extends AbstractController
 
     $connection = Connection::getInstance();
 
-    $query = 'SELECT * FROM products';
+    $query = "
+    SELECT
+      p.id,
+      p.name,
+      p.description,
+      p.photo,
+      p.value,
+      p.quantity,
+      c.name as category_name
+    FROM products p
+    JOIN categories c ON p.category_id = c.id
+    ";
+
     $result = $connection->prepare($query);
     $result->execute();
 
     $products = [];
 
     while ($product = $result->fetch()) {
-
-      $query = 'SELECT * FROM categories WHERE id = :id';
-      $result = $connection->prepare($query);
-      $result->bindParam('id', $product->category_id);
-      $result->execute();
-
-      $category = $result->fetch();
-      $product->category = $category;
-
       $products[] = $product;
     }
 

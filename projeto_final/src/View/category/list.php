@@ -22,8 +22,8 @@
     <?php
     foreach ($data as $category) {
       $createdAt = date_fmt($category->created_at, "d/m/Y");
-      $editUrl = BASE_URL . "/categorias/edit?id={$category->id}";
-      $deleteUrl = BASE_URL . "/categorias/delete?id={$category->id}";
+      $editUrl = "/categorias/edit?id={$category->id}";
+      $deleteUrl = "/categorias/delete?id={$category->id}";
 
       echo "<tr>";
       echo "<td>{$category->id}</td>";

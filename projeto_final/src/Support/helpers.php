@@ -72,8 +72,8 @@ function redirect(string $url): void
   }
 
   if (filter_input(INPUT_GET, "route", FILTER_DEFAULT) != $url) {
-    $location = url($url);
-    header("Location: {$location}");
+    // $location = url($url);
+    header("Location: {$url}");
     exit;
   }
 }
