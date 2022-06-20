@@ -5,36 +5,14 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Core\Connection;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class ProductController extends AbstractController
 {
   public function listAction(array $message = null): void
   {
-    $connection = Connection::getInstance();
-
-    $query = "
-    SELECT
-      p.id,
-      p.name,
-      p.description,
-      p.photo,
-      p.value,
-      p.quantity,
-      p.created_at,
-      c.name as category_name
-    FROM products p
-    JOIN categories c ON p.category_id = c.id
-    ORDER BY p.id
-    ";
-
-    $result = $connection->prepare($query);
-    $result->execute();
-
-    $products = [];
-
-    while ($product = $result->fetch()) {
-      $products[] = $product;
-    }
+    $products = $this->getProducts();
 
     $this->render('product/list', $products, $message);
   }
@@ -153,6 +131,55 @@ class ProductController extends AbstractController
     }
   }
 
+  public function reportAction(): void
+  {
+    $html = $this->getHtmlProductsReport();
+
+    $options = new Options();
+    $options->set('isRemoteEnabled', true);
+
+    $dompdf = new Dompdf($options);
+
+    $dompdf->loadHtml($html);
+
+    $dompdf->setPaper('A4', 'portrait');
+
+    $dompdf->render();
+
+    $dompdf->stream("relatorio_produtos.pdf", array("Attachment" => false));
+  }
+
+  public function getProducts(): array
+  {
+    $connection = Connection::getInstance();
+
+    $query = "
+    SELECT
+      p.id,
+      p.name,
+      p.description,
+      p.photo,
+      p.value,
+      p.quantity,
+      p.created_at,
+      c.name as category_name
+    FROM products p
+    JOIN categories c ON p.category_id = c.id
+    ORDER BY p.id
+    ";
+
+    $result = $connection->prepare($query);
+    $result->execute();
+
+    $products = [];
+
+    while ($product = $result->fetch()) {
+      $products[] = $product;
+    }
+
+    return $products;
+  }
+
   public function getCategories(): array
   {
     $connection = Connection::getInstance();
@@ -168,5 +195,34 @@ class ProductController extends AbstractController
     }
 
     return $categories;
+  }
+
+  protected function getHtmlProductsReport(): string
+  {
+    $products = $this->getProducts();
+
+    $html = file_get_contents(__DIR__ . '/../../src/View/product/report.php');
+
+    foreach ($products as $product) {
+      $price = number_format((float) $product->value, 2, ',', '.');
+
+      $html .= "<tr>";
+      $html .= "<td>{$product->id}</td>";
+      $html .= "<td>{$product->name}</td>";
+      $html .= "<td>{$product->description}</td>";
+      $html .=
+        "<td>
+        <img src='{$product->photo}' alt='{$product->name}' style='max-width: 50px;'>
+      </td>";
+      $html .= "<td>{$price}</td>";
+      $html .= "<td>{$product->quantity}</td>";
+      $html .= "<td>{$product->category_name}</td>";
+      $html .= "</tr>";
+    }
+
+    $html .= "</tbody>";
+    $html .= "</table>";
+
+    return $html;
   }
 }

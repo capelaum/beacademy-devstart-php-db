@@ -3,6 +3,7 @@
 
   <div>
     <a class="btn btn-primary" href="/produtos/add">Adicionar produto</a>
+    <a class="btn btn-secondary" href="/produtos/relatorio">Gerar relatório</a>
   </div>
 </div>
 
