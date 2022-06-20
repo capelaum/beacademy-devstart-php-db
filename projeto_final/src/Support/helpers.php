@@ -29,6 +29,7 @@ function getRoutes()
     BASE_URL . "/categorias" => createRoute(CategoryController::class, 'listAction'),
     BASE_URL . "/categorias/add" => createRoute(CategoryController::class, 'addAction'),
     BASE_URL . "/categorias/edit" => createRoute(CategoryController::class, 'editAction'),
+    BASE_URL . "/categorias/delete" => createRoute(CategoryController::class, 'deleteAction'),
   ];
 }
 

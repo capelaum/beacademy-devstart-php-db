@@ -52,4 +52,19 @@ class CategoryController extends AbstractController
   {
     $this->render('category/edit');
   }
+
+  public function deleteAction(): void
+  {
+    if (isset($_GET['id'])) {
+
+      $connection = Connection::getInstance();
+
+      $query = 'DELETE FROM categories WHERE id = :id';
+      $result = $connection->prepare($query);
+      $result->bindParam('id', $_GET['id']);
+      $result->execute();
+
+      redirect('/categorias');
+    }
+  }
 }
