@@ -26,6 +26,7 @@ function getRoutes()
     "/produtos" => createRoute(ProductController::class, 'listAction'),
     "/produtos/add" => createRoute(ProductController::class, 'addAction'),
     "/produtos/edit" => createRoute(ProductController::class, 'editAction'),
+    "/produtos/delete" => createRoute(ProductController::class, 'deleteAction'),
     "/categorias" => createRoute(CategoryController::class, 'listAction'),
     "/categorias/add" => createRoute(CategoryController::class, 'addAction'),
     "/categorias/edit" => createRoute(CategoryController::class, 'editAction'),

@@ -62,16 +62,10 @@ class CategoryController extends AbstractController
 
   public function editAction(): void
   {
+    $connection = Connection::getInstance();
+
     if (isset($_GET['id'])) {
       $id = (int) $_GET['id'];
-      $connection = Connection::getInstance();
-
-      $query = 'SELECT * FROM categories WHERE id = :id';
-      $result = $connection->prepare($query);
-      $result->bindParam('id', $id);
-      $result->execute();
-
-      $category = $result->fetch();
     }
 
     if ($_POST) {
@@ -96,6 +90,12 @@ class CategoryController extends AbstractController
       redirect("/categorias?message={$message}&type={$type}");
     }
 
+    $query = 'SELECT * FROM categories WHERE id = :id';
+    $result = $connection->prepare($query);
+    $result->bindParam('id', $id);
+    $result->execute();
+
+    $category = $result->fetch();
     $this->render('category/edit', $category);
   }
 
