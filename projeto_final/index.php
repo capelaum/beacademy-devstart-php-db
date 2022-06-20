@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 include __DIR__  . "/vendor/autoload.php";
 
 include 'src/View/shared/head.php';
+include 'src/View/shared/menu.php';
 
 use App\Controller\ErrorController;
 

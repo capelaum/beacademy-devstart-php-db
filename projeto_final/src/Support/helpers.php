@@ -23,12 +23,12 @@ function getRoutes()
   return [
     BASE_URL . "/" => createRoute(IndexController::class, 'indexAction'),
     BASE_URL . "/login" => createRoute(IndexController::class, 'loginAction'),
-    BASE_URL . "/products" => createRoute(ProductController::class, 'listAction'),
-    BASE_URL . "/products/add" => createRoute(ProductController::class, 'addAction'),
-    BASE_URL . "/products/edit" => createRoute(ProductController::class, 'editAction'),
-    BASE_URL . "/categories" => createRoute(CategoryController::class, 'listAction'),
-    BASE_URL . "/categories/add" => createRoute(CategoryController::class, 'addAction'),
-    BASE_URL . "/categories/edit" => createRoute(CategoryController::class, 'editAction'),
+    BASE_URL . "/produtos" => createRoute(ProductController::class, 'listAction'),
+    BASE_URL . "/produtos/add" => createRoute(ProductController::class, 'addAction'),
+    BASE_URL . "/produtos/edit" => createRoute(ProductController::class, 'editAction'),
+    BASE_URL . "/categorias" => createRoute(CategoryController::class, 'listAction'),
+    BASE_URL . "/categorias/add" => createRoute(CategoryController::class, 'addAction'),
+    BASE_URL . "/categorias/edit" => createRoute(CategoryController::class, 'editAction'),
   ];
 }
 
