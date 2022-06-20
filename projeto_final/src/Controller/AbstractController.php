@@ -9,7 +9,6 @@ abstract class AbstractController
   public function render(string $view, array|object $data = null, array $message = null): void
   {
     include __DIR__ . '/../View/shared/head.php';
-    include __DIR__ . '/../View/shared/menu.php';
 
     include __DIR__ . "/../View/{$view}.php";
 

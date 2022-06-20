@@ -11,3 +11,8 @@
 </head>
 
 <body class="container mt-5" style="background-color: #F8FAFC">
+
+  <a class="btn btn-dark" href="/">Início</a>
+  <a class="btn btn-dark" href="/categorias">Categorias</a>
+  <a class="btn btn-dark" href="/produtos">Produtos</a>
+  <hr>
