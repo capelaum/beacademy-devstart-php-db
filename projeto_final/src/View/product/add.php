@@ -11,13 +11,14 @@
   <input type="text" name="photo" class="form-control" required>
 
   <label for="value" class="mt-4">Preço</label>
-  <input type="number" min="0.1" max="99999" step="0.01" name="value" class="form-control" required>
+  <input type="number" min="0.1" step="0.01" name="value" class="form-control" required>
 
   <label for="quantity" class="mt-4">Quantidade</label>
   <input type="number" min="0" max="99999" name="quantity" class="form-control" required>
 
   <label for="category_id" class="mt-4">Categoria</label>
-  <select name="category_id" class="form-control" required>
+  <select name="category_id" class="form-select" required>
+    <option value="" selected disable hidden>-- Selecione --</option>
     <?php foreach ($data as $category) : ?>
       <option value="<?= $category->id ?>"><?= $category->name ?></option>
     <?php endforeach; ?>

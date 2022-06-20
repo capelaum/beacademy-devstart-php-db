@@ -8,15 +8,8 @@ use App\Core\Connection;
 
 class ProductController extends AbstractController
 {
-  public function listAction(): void
+  public function listAction(array $message = null): void
   {
-    $message = null;
-
-    if (isset($_GET['message']) && isset($_GET['type'])) {
-      $message['message'] = urldecode($_GET['message']);
-      $message['type'] = urldecode($_GET['type']);
-    }
-
     $connection = Connection::getInstance();
 
     $query = "
@@ -66,10 +59,11 @@ class ProductController extends AbstractController
 
       $result->execute();
 
-      $message = urlencode('Produto criado com sucesso!');
-      $type = urlencode('success');
+      $message['message'] = urlencode('Produto criado com sucesso!');
+      $message['type'] = urlencode('success');
 
-      redirect("/produtos?message={$message}&type={$type}");
+      $this->listAction($message);
+      return;
     }
 
     $categories = $this->getCategories();
@@ -109,10 +103,11 @@ class ProductController extends AbstractController
 
       $result->execute();
 
-      $message = urlencode('Produto atualizado com sucesso!');
-      $type = urlencode('success');
+      $message['message'] = urlencode('Produto editado com sucesso!');
+      $message['type'] = urlencode('success');
 
-      redirect("/produtos?message={$message}&type={$type}");
+      $this->listAction($message);
+      return;
     }
 
     $query = "
@@ -150,10 +145,11 @@ class ProductController extends AbstractController
       $result->bindParam('id', $_GET['id']);
       $result->execute();
 
-      $message = urlencode('Produto deletado com sucesso!');
-      $type = urlencode('success');
+      $message['message'] = urlencode('Produto excluído com sucesso!');
+      $message['type'] = urlencode('success');
 
-      redirect("/produtos?message={$message}&type={$type}");
+      $this->listAction($message);
+      return;
     }
   }
 

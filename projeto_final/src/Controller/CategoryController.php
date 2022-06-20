@@ -8,15 +8,8 @@ use App\Core\Connection;
 
 class CategoryController extends AbstractController
 {
-  public function listAction(): void
+  public function listAction(array $message = null): void
   {
-    $message = null;
-
-    if (isset($_GET['message']) && isset($_GET['type'])) {
-      $message['message'] = urldecode($_GET['message']);
-      $message['type'] = urldecode($_GET['type']);
-    }
-
     $connection = Connection::getInstance();
 
     $query = 'SELECT * FROM categories ORDER BY id';
@@ -48,12 +41,11 @@ class CategoryController extends AbstractController
 
       $result->execute();
 
-      $message = urlencode('Categoria criada com sucesso!');
-      $type = urlencode('success');
+      $message['message'] = urlencode('Categoria criada com sucesso!');
+      $message['type'] = urlencode('success');
 
-      redirect("/categorias?message={$message}&type={$type}");
-
-      redirect('/categorias');
+      $this->listAction($message);
+      return;
     }
 
 
@@ -84,10 +76,11 @@ class CategoryController extends AbstractController
 
       $result->execute();
 
-      $message = urlencode('Categoria editada com sucesso!');
-      $type = urlencode('success');
+      $message['message'] = urlencode('Categoria editada com sucesso!');
+      $message['type'] = urlencode('success');
 
-      redirect("/categorias?message={$message}&type={$type}");
+      $this->listAction($message);
+      return;
     }
 
     $query = 'SELECT * FROM categories WHERE id = :id';
@@ -109,10 +102,11 @@ class CategoryController extends AbstractController
       $result->bindParam('id', $_GET['id']);
       $result->execute();
 
-      $message = urlencode('Categoria deletada com sucesso!');
-      $type = urlencode('success');
+      $message['message'] = urlencode('Categoria excluída com sucesso!');
+      $message['type'] = urlencode('success');
 
-      redirect("/categorias?message={$message}&type={$type}");
+      $this->listAction($message);
+      return;
     }
   }
 }

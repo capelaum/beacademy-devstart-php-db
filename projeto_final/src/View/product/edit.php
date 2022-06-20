@@ -27,5 +27,5 @@
     <?php endforeach; ?>
   </select>
 
-  <button type="submit" class="btn btn-primary my-4">Enviar</button>
+  <button type="submit" class="btn btn-primary my-4">Editar</button>
 </form>

@@ -6,14 +6,6 @@
   </div>
 </div>
 
-<?php if (isset($message)) : ?>
-
-  <div class="alert alert-<?= $message['type'] ?>">
-    <?= $message['message'] ?>
-  </div>
-
-<?php endif; ?>
-
 <table class="table table-hover table-striped">
   <thead class="table-dark">
     <tr>
