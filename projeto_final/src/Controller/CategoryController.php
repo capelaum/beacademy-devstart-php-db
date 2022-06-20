@@ -41,8 +41,8 @@ class CategoryController extends AbstractController
 
       $result->execute();
 
-      $message['message'] = urlencode('Categoria criada com sucesso!');
-      $message['type'] = urlencode('success');
+      $message['message'] = 'Categoria criada com sucesso!';
+      $message['type'] = 'success';
 
       $this->listAction($message);
       return;
@@ -76,8 +76,8 @@ class CategoryController extends AbstractController
 
       $result->execute();
 
-      $message['message'] = urlencode('Categoria editada com sucesso!');
-      $message['type'] = urlencode('success');
+      $message['message'] = 'Categoria editada com sucesso!';
+      $message['type'] = 'success';
 
       $this->listAction($message);
       return;
@@ -102,8 +102,8 @@ class CategoryController extends AbstractController
       $result->bindParam('id', $_GET['id']);
       $result->execute();
 
-      $message['message'] = urlencode('Categoria excluída com sucesso!');
-      $message['type'] = urlencode('success');
+      $message['message'] = 'Categoria excluída com sucesso!';
+      $message['type'] = 'success';
 
       $this->listAction($message);
       return;

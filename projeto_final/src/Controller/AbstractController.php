@@ -11,9 +11,6 @@ abstract class AbstractController
     include __DIR__ . '/../View/shared/head.php';
 
     if (isset($message['message']) && isset($message['type'])) {
-      $message['message'] = urldecode($message['message']);
-      $message['type'] = urldecode($message['type']);
-
       include __DIR__ . '/../View/shared/message.php';
     }
 

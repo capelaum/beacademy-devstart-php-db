@@ -59,8 +59,8 @@ class ProductController extends AbstractController
 
       $result->execute();
 
-      $message['message'] = urlencode('Produto criado com sucesso!');
-      $message['type'] = urlencode('success');
+      $message['message'] = 'Produto criado com sucesso!';
+      $message['type'] = 'success';
 
       $this->listAction($message);
       return;
@@ -103,8 +103,8 @@ class ProductController extends AbstractController
 
       $result->execute();
 
-      $message['message'] = urlencode('Produto editado com sucesso!');
-      $message['type'] = urlencode('success');
+      $message['message'] = 'Produto editado com sucesso!';
+      $message['type'] = 'success';
 
       $this->listAction($message);
       return;
@@ -145,8 +145,8 @@ class ProductController extends AbstractController
       $result->bindParam('id', $_GET['id']);
       $result->execute();
 
-      $message['message'] = urlencode('Produto excluído com sucesso!');
-      $message['type'] = urlencode('success');
+      $message['message'] = 'Produto excluído com sucesso!';
+      $message['type'] = 'success';
 
       $this->listAction($message);
       return;
