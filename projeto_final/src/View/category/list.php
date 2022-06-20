@@ -1,4 +1,12 @@
-<h1 class="mb-5">Lista de Categorias</h1>
+<h1>Lista de Categorias</h1>
+
+<?php if (isset($message)) : ?>
+
+  <div class="alert alert-<?= $message['type'] ?>">
+    <?= $message['message'] ?>
+  </div>
+
+<?php endif; ?>
 
 <table class="table table-hover table-striped">
   <thead class="table-dark">

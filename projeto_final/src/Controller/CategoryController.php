@@ -10,6 +10,13 @@ class CategoryController extends AbstractController
 {
   public function listAction(): void
   {
+    $message = null;
+
+    if (isset($_GET['message']) && isset($_GET['type'])) {
+      $message['message'] = urldecode($_GET['message']);
+      $message['type'] = urldecode($_GET['type']);
+    }
+
     $connection = Connection::getInstance();
 
     $query = 'SELECT * FROM categories';
@@ -22,7 +29,7 @@ class CategoryController extends AbstractController
       $categories[] = $category;
     }
 
-    $this->render('category/list', $categories);
+    $this->render('category/list', $categories, $message);
   }
 
   public function addAction(): void
@@ -41,6 +48,11 @@ class CategoryController extends AbstractController
 
       $result->execute();
 
+      $message = urlencode('Categoria criada com sucesso!');
+      $type = urlencode('success');
+
+      redirect("/categorias?message={$message}&type={$type}");
+
       redirect('/categorias');
     }
 
@@ -56,7 +68,6 @@ class CategoryController extends AbstractController
   public function deleteAction(): void
   {
     if (isset($_GET['id'])) {
-
       $connection = Connection::getInstance();
 
       $query = 'DELETE FROM categories WHERE id = :id';
@@ -64,7 +75,10 @@ class CategoryController extends AbstractController
       $result->bindParam('id', $_GET['id']);
       $result->execute();
 
-      redirect('/categorias');
+      $message = urlencode('Categoria deletada com sucesso!');
+      $type = urlencode('success');
+
+      redirect("/categorias?message={$message}&type={$type}");
     }
   }
 }
