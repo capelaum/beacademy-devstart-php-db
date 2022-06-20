@@ -27,9 +27,11 @@ class ProductController extends AbstractController
       p.photo,
       p.value,
       p.quantity,
+      p.created_at,
       c.name as category_name
     FROM products p
     JOIN categories c ON p.category_id = c.id
+    ORDER BY p.id
     ";
 
     $result = $connection->prepare($query);
@@ -121,6 +123,7 @@ class ProductController extends AbstractController
       p.photo,
       p.value,
       p.quantity,
+      p.category_id,
       c.name as category_name
     FROM products p
     JOIN categories c ON p.category_id = c.id

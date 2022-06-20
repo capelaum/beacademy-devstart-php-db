@@ -1,4 +1,12 @@
-<h1>Lista de Categorias</h1>
+<div class="d-flex flex-sm-row justify-content-between align-items-center my-4">
+  <h1>Lista de Categorias</h1>
+
+  <div>
+    <a class="btn btn-primary" href="/categorias/add">Adicionar categoria</a>
+  </div>
+</div>
+
+
 
 <?php if (isset($message)) : ?>
 

@@ -17,8 +17,12 @@
   <input type="number" min="0" max="99999" name="quantity" class="form-control" value="<?= $data->quantity ?>">
 
   <label for="category_id" class="mt-4">Categoria</label>
-  <select name="category_id" class="form-control"> >
+  <select name="category_id" class="form-control">
+    <option value="<?= $data->category_id ?>" selected><?= $data->category_name ?></option>
     <?php foreach ($data->categories as $category) : ?>
+      <?php if ($category->id == $data->category_id) : ?>
+        <?php continue; ?>
+      <?php endif; ?>
       <option value="<?= $category->id ?>"><?= $category->name ?></option>
     <?php endforeach; ?>
   </select>

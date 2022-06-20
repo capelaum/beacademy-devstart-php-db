@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
 
     $connection = Connection::getInstance();
 
-    $query = 'SELECT * FROM categories';
+    $query = 'SELECT * FROM categories ORDER BY id';
     $result = $connection->prepare($query);
     $result->execute();
 

@@ -22,7 +22,6 @@ function getRoutes()
 {
   return [
     "/" => createRoute(IndexController::class, 'indexAction'),
-    "/login" => createRoute(IndexController::class, 'loginAction'),
     "/produtos" => createRoute(ProductController::class, 'listAction'),
     "/produtos/add" => createRoute(ProductController::class, 'addAction'),
     "/produtos/edit" => createRoute(ProductController::class, 'editAction'),
