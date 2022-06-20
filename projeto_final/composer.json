@@ -1,0 +1,23 @@
+{
+  "name": "theca/projeto_final",
+  "description": "Projeto final de PHPOO",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    },
+    "files": [
+      "src/Support/config.php",
+      "src/Support/helpers.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Luís Vinicius Capelletto",
+      "email": "thecapellett@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
+}
