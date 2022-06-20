@@ -46,7 +46,41 @@ class ProductController extends AbstractController
 
   public function addAction(): void
   {
-    $this->render('product/add');
+    $connection = Connection::getInstance();
+
+    if ($_POST) {
+      $params = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $query = "
+      INSERT INTO products (name, description, photo, value, quantity, category_id)
+      VALUES (:name, :description, :photo, :value, :quantity, :category_id)
+      ";
+
+      $result = $connection->prepare($query);
+
+      foreach ($params as $key => &$val) {
+        $result->bindParam($key, $val);
+      }
+
+      $result->execute();
+
+      $message = urlencode('Produto criado com sucesso!');
+      $type = urlencode('success');
+
+      redirect("/produtos?message={$message}&type={$type}");
+    }
+
+    $query = 'SELECT * FROM categories';
+    $result = $connection->prepare($query);
+    $result->execute();
+
+    $categories = [];
+
+    while ($category = $result->fetch()) {
+      $categories[] = $category;
+    }
+
+    $this->render('product/add', $categories);
   }
 
   public function editAction(): void
