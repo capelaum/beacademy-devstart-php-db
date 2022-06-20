@@ -1,6 +1,6 @@
 {
   "name": "theca/projeto_final",
-  "description": "Projeto final de PHPOO",
+  "description": "Projeto final de PHP - BD",
   "type": "project",
   "license": "MIT",
   "autoload": {
